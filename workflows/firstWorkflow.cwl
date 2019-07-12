@@ -10,42 +10,42 @@ inputs:
     inputBinding:
       position: 1  
 outputs: 
-  outputHTML1:
+  fastqc_output_HTML_beforetrim:
     type:
       type: array
       items: File
-    outputSource: fastqc1/out1
-  outputZIP1:
+    outputSource: fastqc1/fastqc_html_output
+  fastqc_output_ZIP_beforetrim:
     type:
       type: array
       items: File
-    outputSource: fastqc1/out2
-  outputGZar:
+    outputSource: fastqc1/fastqc_zip_output
+  outputGZar_trimgalore:
     type:
       type: array
       items: File
     outputSource: trim_galore/outputGZ
-  outputTXTar:
+  outputTXTar_trimgalore:
     type:
       type: array
       items: File
     outputSource: trim_galore/outputTXT
-  outputHTML2:
+  fastqc_output_HTML_aftertrim:
     type:
       type: array
       items: File
-    outputSource: fastqc2/out1
-  outputZIP2:
+    outputSource: fastqc2/fastqc_html_output
+  fastqc_output_ZIP_aftertrim::
     type:
       type: array
       items: File
-    outputSource: fastqc2/out2
+    outputSource: fastqc2/fastqc_zip_output
 steps:
   fastqc1:
     run: ../wrappers/fastqc.cwl
     in:
       files: files
-    out: [out1, out2]
+    out: [fastqc_html_output, fastqc_zip_output]
   trim_galore:
     run: ../wrappers/trim.cwl
     in:
@@ -55,4 +55,4 @@ steps:
     run: ../wrappers/fastqc.cwl
     in:
       files: trim_galore/outputGZ
-    out: [out1, out2]
+    out: [fastqc_html_output, fastqc_zip_output]
