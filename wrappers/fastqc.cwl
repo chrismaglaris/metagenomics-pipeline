@@ -11,13 +11,13 @@ inputs:
     inputBinding:
       position: 1
 outputs: 
-  out1:
+  fastqc_html_output:
     type:
       type: array
       items: File
     outputBinding:
       glob: "*.html"
-  out2:
+  fastqc_zip_output:
     type:
       type: array
       items: File
