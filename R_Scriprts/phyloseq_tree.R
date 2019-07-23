@@ -5,7 +5,7 @@ phyloseq_tree <- function(sample_metadata, table, taxonomy, rooted_tree) {
   # b <- "table.qza"
   # c <- "taxonomy.qza"
   # d <- "rooted-tree.qza"
-  # phyloseq_tree(a,b,c,d)
+  # phyloseq_tree(a,b,c,d) #Run function
   
   library(tidyverse)
   library(qiime2R)
