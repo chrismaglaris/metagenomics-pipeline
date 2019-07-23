@@ -9,6 +9,7 @@ inputs:
     type:
       type: array
       items: File
+    default: []
   filesTXT:
     type:
       type: array
@@ -34,16 +35,40 @@ inputs:
       type: array
       items: File
     default: []
+  barcodes:
+    type: File
   dir_basename:
     type: string
     default: fastqc_trim_workflow
+  qiime2_input_dir:
+    type: string
+    default: emp-paired-seq
 expression: |
   ${
-    return {"output_dir": {
-      "class": "Directory", 
-      "basename": inputs.dir_basename,
-      "listing": inputs.filesGZ.concat(inputs.filesTXT, inputs.filesHTML_pre, inputs.filesZIP_pre, inputs.filesHTML_post, inputs.filesZIP_post)
-    } };
+
+    var obj = {
+      "output_dir": {
+        "class": "Directory",
+        "basename": inputs.dir_basename,
+        "listing": inputs.filesTXT.concat(inputs.filesHTML_pre, inputs.filesZIP_pre, inputs.filesHTML_post, inputs.filesZIP_post)
+      }
+    };
+
+    inputs.filesGZ[0].basename = "forward.fastq.gz";
+    inputs.filesGZ[1].basename = "reverse.fastq.gz";
+    inputs.filesGZ.push(inputs.barcodes);
+
+    var output_dir2 = {
+        "class": "Directory",
+        "basename": inputs.qiime2_input_dir,
+        "listing": inputs.filesGZ
+      };
+
+    return { 
+      "output_dir": obj,
+      "output_dir2": output_dir2
+    };
   }
 outputs:
   output_dir: Directory
+  output_dir2: Directory

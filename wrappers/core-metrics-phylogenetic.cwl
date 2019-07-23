@@ -25,7 +25,7 @@ inputs:
     inputBinding:
       prefix: --output-dir
 outputs: 
-  dir:
+  phylogenetic_metrics_dir:
     type: Directory
     outputBinding:
       glob: $(inputs.output_dir)

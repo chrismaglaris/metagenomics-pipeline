@@ -1,0 +1,9 @@
+fastq_dir:
+  class: Directory
+  path: ../emp-paired-seq
+barcodes:
+  class: File
+  path: ../barcodes/barcodes.fastq.gz
+metadata_file:
+  class: File
+  path: ../metadata/metadata.tsv

@@ -8,7 +8,7 @@ inputs:
     type: string
     inputBinding:
       prefix: --type
-    default: "EMPPairedEndSequences"
+    default: "EMPSingleEndSequences"
   input_path:
     type: Directory
     inputBinding:
