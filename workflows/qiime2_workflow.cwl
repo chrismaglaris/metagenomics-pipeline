@@ -12,6 +12,8 @@ inputs:
     type: File
   metadata_file:
     type: File
+  classifier:
+    type: File
   demux_barcode_column:
     type: string
     default: BarcodeSequence
@@ -66,18 +68,30 @@ inputs:
   diversity_metrics_dir:
     type: string
     default: core-metrics-results
-  alpha_file_to_search_faith:
+  rarefaction_max_depth:
+    type: int
+    default: 4000
+  rarefaction_visualization:
     type: string
-    default: faith_pd_vector.qza
-  alpha_visualization_faith:
+    default: alpha-rarefaction.qzv
+  classifier_sklearn:
     type: string
-    default: faith-pd-group-significance.qzv
-  alpha_file_to_search_evenness:
+    default: taxonomy.qza
+  classifier_sklearn_visualization:
     type: string
-    default: evenness_vector.qza
-  alpha_visualization_evenness:
-    type: string
-    default: evenness-group-significance.qzv
+    default: taxonomy.qzv
+  # alpha_file_to_search_faith:
+  #   type: string
+  #   default: faith_pd_vector.qza
+  # alpha_visualization_faith:
+  #   type: string
+  #   default: faith-pd-group-significance.qzv
+  # alpha_file_to_search_evenness:
+  #   type: string
+  #   default: evenness_vector.qza
+  # alpha_visualization_evenness:
+  #   type: string
+  #   default: evenness-group-significance.qzv
 outputs: 
   o_artifact_tools_import:
     type: File
@@ -124,6 +138,17 @@ outputs:
   o_diversity_metrics_dir:
     type: Directory
     outputSource: qiime-diversity-core-metrics-phylogenetic/phylogenetic_metrics_dir
+  o_alpha_rarefaction:
+    type: File
+    outputSource: qiime-diversity-alpha-rarefaction/demux_visualization
+  o_classifier_sklearn:
+    type: File
+    outputSource: qiime-feature-classifier-sklearn/classification
+  o_classifier_sklearn_visualization:
+    type: File
+    outputSource: classifier-sklearn-visualization/stats_visualization
+  
+
 steps:
   qiime-tools-import:
     run: ../wrappers/tools-import-single.cwl
@@ -197,30 +222,53 @@ steps:
       input_metadata: metadata_file
       output_dir: diversity_metrics_dir
     out: [phylogenetic_metrics_dir]
-  search-for-file-faith:
-    run: ../wrappers/search-in-dir.cwl
-    in: 
-      directory: qiime-diversity-core-metrics-phylogenetic/phylogenetic_metrics_dir
-      file_to_search: alpha_file_to_search_faith
-    out: [output_file]
-  qiime-alpha-group-significance-faith:
-    run: ../wrappers/alpha-group-significance.cwl
+  qiime-diversity-alpha-rarefaction:
+    run: ../wrappers/alpha-rarefaction.cwl
     in:
-      input_alpha-diversity: search-for-file-faith/output_file
+      input_table: qiime-dada2-denoise-single/table
+      input_phylogeny: qiime-align-to-tree-mafft-fasttree/rooted_tree
+      input_max_depth: rarefaction_max_depth
       input_metadata: metadata_file
-      output_visualization: alpha_visualization_faith
-    out: [visualization]
-  search-for-file-evenness:
-    run: ../wrappers/search-in-dir.cwl
-    in: 
-      directory: qiime-diversity-core-metrics-phylogenetic/phylogenetic_metrics_dir
-      file_to_search: alpha_file_to_search_evenness
-    out: [output_file]
-  qiime-alpha-group-significance-evenness:
-    run: ../wrappers/alpha-group-significance.cwl
+      output_visualization: rarefaction_visualization
+    out: [demux_visualization]
+  qiime-feature-classifier-sklearn:
+    run: ../wrappers/classify-sklearn.cwl
     in:
-      input_alpha-diversity: search-for-file-evenness/output_file
-      input_metadata: metadata_file
-      output_visualization: alpha_visualization_evenness
-    out: [visualization]
+      input_classifier: classifier
+      input_reads: qiime-dada2-denoise-single/rep_seq
+      output_classification: 
+    out: [classification]
+  classifier-sklearn-visualization:
+    run: ../wrappers/metadata-tabulate.cwl
+    in:
+      input_stats_file: qiime-feature-classifier-sklearn/classification
+      output_stats_visualization: classifier_sklearn_visualization
+    out: [stats_visualization]
+
+  # search-for-file-faith:
+  #   run: ../wrappers/search-in-dir.cwl
+  #   in: 
+  #     directory: qiime-diversity-core-metrics-phylogenetic/phylogenetic_metrics_dir
+  #     file_to_search: alpha_file_to_search_faith
+  #   out: [output_file]
+  # qiime-alpha-group-significance-faith:
+  #   run: ../wrappers/alpha-group-significance.cwl
+  #   in:
+  #     input_alpha-diversity: search-for-file-faith/output_file
+  #     input_metadata: metadata_file
+  #     output_visualization: alpha_visualization_faith
+  #   out: [visualization]
+  # search-for-file-evenness:
+  #   run: ../wrappers/search-in-dir.cwl
+  #   in: 
+  #     directory: qiime-diversity-core-metrics-phylogenetic/phylogenetic_metrics_dir
+  #     file_to_search: alpha_file_to_search_evenness
+  #   out: [output_file]
+  # qiime-alpha-group-significance-evenness:
+  #   run: ../wrappers/alpha-group-significance.cwl
+  #   in:
+  #     input_alpha-diversity: search-for-file-evenness/output_file
+  #     input_metadata: metadata_file
+  #     output_visualization: alpha_visualization_evenness
+  #   out: [visualization]
     
