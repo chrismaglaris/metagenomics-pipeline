@@ -5,6 +5,11 @@ class: ExpressionTool
 requirements:
   InlineJavascriptRequirement: {}
 inputs:
+  rawFiles:
+    type: 
+      type: array
+      items: File
+    default: []
   filesGZ:
     type:
       type: array
@@ -50,18 +55,18 @@ expression: |
       "output_dir": {
         "class": "Directory",
         "basename": inputs.dir_basename,
-        "listing": inputs.filesTXT.concat(inputs.filesHTML_pre, inputs.filesZIP_pre, inputs.filesHTML_post, inputs.filesZIP_post)
+        "listing": inputs.filesTXT.concat(inputs.filesGZ, inputs.filesHTML_pre, inputs.filesZIP_pre, inputs.filesHTML_post, inputs.filesZIP_post)
       }
     };
 
-    inputs.filesGZ[0].basename = "forward.fastq.gz";
-    inputs.filesGZ[1].basename = "reverse.fastq.gz";
-    inputs.filesGZ.push(inputs.barcodes);
+    inputs.rawFiles[0].basename = "forward.fastq.gz";
+    inputs.rawFiles[1].basename = "reverse.fastq.gz";
+    inputs.rawFiles.push(inputs.barcodes);
 
     var output_dir2 = {
         "class": "Directory",
         "basename": inputs.qiime2_input_dir,
-        "listing": inputs.filesGZ
+        "listing": inputs.rawFiles
       };
 
     return { 

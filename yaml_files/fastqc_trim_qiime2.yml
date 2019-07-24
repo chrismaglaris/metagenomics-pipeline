@@ -1,10 +1,10 @@
-fastq_dir:
-  class: Directory
-  path: ../emp-paired-seq
+files:
+  - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R1_001.fastq.gz} 
+  - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R2_001.fastq.gz}
 barcodes:
   class: File
   path: ../barcodes/barcodes.fastq.gz
-metadata_file:
+metadata:
   class: File
   path: ../metadata/metadata.tsv
 classifier:

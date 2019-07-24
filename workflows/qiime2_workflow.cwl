@@ -4,7 +4,6 @@ cwlVersion: v1.0
 class: Workflow
 requirements:
   - class: MultipleInputFeatureRequirement
-
 inputs:
   fastq_dir:
     type: Directory
@@ -92,12 +91,12 @@ inputs:
   composition_add_pseudocount_artifact:
     type: string
     default: comp-gut-table.qza
-  composition_ancom:
-    type: string
-    default: Subject
-  composition_ancom_visualization:
-    type: string
-    default: ancom-Subject.qzv
+  # composition_ancom:
+  #   type: string
+  #   default: Subject
+  # composition_ancom_visualization:
+  #   type: string
+  #   default: ancom-Subject.qzv
   # alpha_file_to_search_faith:
   #   type: string
   #   default: faith_pd_vector.qza
@@ -174,19 +173,19 @@ outputs:
   o_composition_table_visualization:
     type: File
     outputSource: qiime-composition-add-pseudocount/composition_table
-  o_composition_ancom:
-    type: File
-    outputSource: qiime-composition-ancom/visualization
+  # o_composition_ancom:
+  #   type: File
+  #   outputSource: qiime-composition-ancom/visualization
   
 
 steps:
   qiime-tools-import:
-    run: ../wrappers/tools-import-single.cwl
+    run: ../wrappers/tools-import.cwl
     in:
       input_path: fastq_dir
     out: [artifact_tools_import]
   qiime-demux-emp-paired:
-    run: ../wrappers/demux-emp-single.cwl
+    run: ../wrappers/demux-emp-paired.cwl
     in:
       input_seq: qiime-tools-import/artifact_tools_import
       barcodes_file: metadata_file
@@ -296,14 +295,14 @@ steps:
       input_table: qiime-feature-table-filter-samples/filtered_table
       output_composition_table: composition_add_pseudocount_artifact
     out: [composition_table]
-  qiime-composition-ancom:
-    run: ../wrappers/composition-ancom.cwl
-    in:
-      input_table: qiime-composition-add-pseudocount/composition_table
-      input_metadata: metadata_file
-      input_metadata_column: composition_ancom
-      output_visualization: composition_ancom_visualization
-    out: [visualization]
+  # qiime-composition-ancom:
+  #   run: ../wrappers/composition-ancom.cwl
+  #   in:
+  #     input_table: qiime-composition-add-pseudocount/composition_table
+  #     input_metadata: metadata_file
+  #     input_metadata_column: composition_ancom
+  #     output_visualization: composition_ancom_visualization
+  #   out: [visualization]
 
 
   # search-for-file-faith:

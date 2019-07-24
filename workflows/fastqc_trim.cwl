@@ -41,6 +41,7 @@ steps:
   create_fqc_tr_dir:
     run: ../wrappers/move-to-dir.cwl
     in:
+      rawFiles: files
       filesGZ: trim_galore/outputGZ
       filesTXT: trim_galore/outputTXT
       filesHTML_pre: fastqc1/fastqc_html_output
