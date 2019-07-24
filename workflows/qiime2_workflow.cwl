@@ -89,7 +89,7 @@ inputs:
   feature_table_filter_samples_artifact:
     type: string
     default: gut-table.qza
-  composition_add_pseudocount_visualization:
+  composition_add_pseudocount_artifact:
     type: string
     default: comp-gut-table.qza
   composition_ancom:
@@ -294,7 +294,7 @@ steps:
     run: ../wrappers/add-pseudocount.cwl
     in:
       input_table: qiime-feature-table-filter-samples/filtered_table
-      output_composition_table: composition_add_pseudocount_visualization
+      output_composition_table: composition_add_pseudocount_artifact
     out: [composition_table]
   qiime-composition-ancom:
     run: ../wrappers/composition-ancom.cwl
