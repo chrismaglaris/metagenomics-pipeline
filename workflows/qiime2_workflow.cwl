@@ -80,6 +80,24 @@ inputs:
   classifier_sklearn_visualization:
     type: string
     default: taxonomy.qzv
+  taxa_barplot_visualization:
+    type: string
+    default: taxa-bar-plots.qzv
+  feature_table_filter_samples:
+    type: string
+    default: "BodySite='gut'"
+  feature_table_filter_samples_artifact:
+    type: string
+    default: gut-table.qza
+  composition_add_pseudocount_visualization:
+    type: string
+    default: comp-gut-table.qza
+  composition_ancom:
+    type: string
+    default: Subject
+  composition_ancom_visualization:
+    type: string
+    default: ancom-Subject.qzv
   # alpha_file_to_search_faith:
   #   type: string
   #   default: faith_pd_vector.qza
@@ -147,6 +165,18 @@ outputs:
   o_classifier_sklearn_visualization:
     type: File
     outputSource: classifier-sklearn-visualization/stats_visualization
+  o_taxa_barplot_visualization:
+    type: File
+    outputSource: qiime-taxa-barplot/visualization
+  o_feature_table_filter_samples_artifact:
+    type: File
+    outputSource: qiime-feature-table-filter-samples/filtered_table
+  o_composition_table_visualization:
+    type: File
+    outputSource: qiime-composition-add-pseudocount/composition_table
+  o_composition_ancom:
+    type: File
+    outputSource: qiime-composition-ancom/visualization
   
 
 steps:
@@ -236,7 +266,7 @@ steps:
     in:
       input_classifier: classifier
       input_reads: qiime-dada2-denoise-single/rep_seq
-      output_classification: 
+      output_classification: classifier_sklearn
     out: [classification]
   classifier-sklearn-visualization:
     run: ../wrappers/metadata-tabulate.cwl
@@ -244,6 +274,37 @@ steps:
       input_stats_file: qiime-feature-classifier-sklearn/classification
       output_stats_visualization: classifier_sklearn_visualization
     out: [stats_visualization]
+  qiime-taxa-barplot:
+    run: ../wrappers/taxa-barplot.cwl
+    in: 
+      input_table: qiime-dada2-denoise-single/table
+      input_taxonomy: qiime-feature-classifier-sklearn/taxonomy
+      input_metadata: metadata_file
+      output_visualization: taxa_barplot_visualization
+    out: [visualization]
+  qiime-feature-table-filter-samples:
+    run: ../wrappers/filter-samples.cwl
+    in: 
+      input_table: qiime-dada2-denoise-single/table
+      input_metadata: metadata_file
+      input_expr: feature_table_filter_samples
+      output_filtered_table: feature_table_filter_samples_artifact
+    out: [filtered_table]
+  qiime-composition-add-pseudocount:
+    run: ../wrappers/add-pseudocount.cwl
+    in:
+      input_table: qiime-feature-table-filter-samples/filtered_table
+      output_composition_table: composition_add_pseudocount_visualization
+    out: [composition_table]
+  qiime-composition-ancom:
+    run: ../wrappers/composition-ancom.cwl
+    in:
+      input_table: qiime-dada2-denoise-single/table
+      input_metadata: metadata_file
+      input_metadata_column: composition_ancom
+      output_visualization: composition_ancom_visualization
+    out: [visualization]
+
 
   # search-for-file-faith:
   #   run: ../wrappers/search-in-dir.cwl
