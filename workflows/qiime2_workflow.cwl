@@ -89,7 +89,7 @@ inputs:
   feature_table_filter_samples_artifact:
     type: string
     default: gut-table.qza
-  composition_add_pseudocount_visualization:
+  composition_add_pseudocount_artifact:
     type: string
     default: comp-gut-table.qza
   composition_ancom:
@@ -278,7 +278,7 @@ steps:
     run: ../wrappers/taxa-barplot.cwl
     in: 
       input_table: qiime-dada2-denoise-single/table
-      input_taxonomy: qiime-feature-classifier-sklearn/taxonomy
+      input_taxonomy: qiime-feature-classifier-sklearn/classification
       input_metadata: metadata_file
       output_visualization: taxa_barplot_visualization
     out: [visualization]
@@ -294,12 +294,12 @@ steps:
     run: ../wrappers/add-pseudocount.cwl
     in:
       input_table: qiime-feature-table-filter-samples/filtered_table
-      output_composition_table: composition_add_pseudocount_visualization
+      output_composition_table: composition_add_pseudocount_artifact
     out: [composition_table]
   qiime-composition-ancom:
     run: ../wrappers/composition-ancom.cwl
     in:
-      input_table: qiime-dada2-denoise-single/table
+      input_table: qiime-composition-add-pseudocount/composition_table
       input_metadata: metadata_file
       input_metadata_column: composition_ancom
       output_visualization: composition_ancom_visualization
