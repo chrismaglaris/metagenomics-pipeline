@@ -175,9 +175,9 @@ steps:
   fastqc_trim_galore:
     run: ../workflows/fastqc_trim.cwl
     in:
-      files: files
-      barcodes: barcodes
-    out: [output_Fqc_Tr, output_GZ_files]
+      raw_files: files
+      barcodes_file: barcodes
+    out: [fastqc_trim_workflow_dir, qiime2_workflow_input_dir]
   qiime2_workflow:
     run: ../workflows/qiime2_workflow.cwl
     in:
