@@ -278,7 +278,7 @@ steps:
     run: ../wrappers/taxa-barplot.cwl
     in: 
       input_table: qiime-dada2-denoise-single/table
-      input_taxonomy: qiime-feature-classifier-sklearn/taxonomy
+      input_taxonomy: qiime-feature-classifier-sklearn/classification
       input_metadata: metadata_file
       output_visualization: taxa_barplot_visualization
     out: [visualization]
@@ -299,7 +299,7 @@ steps:
   qiime-composition-ancom:
     run: ../wrappers/composition-ancom.cwl
     in:
-      input_table: qiime-dada2-denoise-single/table
+      input_table: qiime-composition-add-pseudocount/composition_table
       input_metadata: metadata_file
       input_metadata_column: composition_ancom
       output_visualization: composition_ancom_visualization
