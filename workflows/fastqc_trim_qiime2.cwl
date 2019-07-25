@@ -112,52 +112,52 @@ outputs:
     outputSource: qiime2_workflow/o_artifact_tools_import
   out_demux:
     type: File
-    outputSource: qiime2_workflow/o_demux
+    outputSource: qiime2_workflow/o_demux_artifact
   out_demux_details:
     type: File
-    outputSource: qiime2_workflow/o_demux_details
+    outputSource: qiime2_workflow/o_demux_details_artifact
   out_demux_summarize:
     type: File
-    outputSource: qiime2_workflow/o_demux_summarize
+    outputSource: qiime2_workflow/o_demux_summarize_artifact
   out_dada2_rep_seq:
     type: File
-    outputSource: qiime2_workflow/o_dada2_rep_seq
+    outputSource: qiime2_workflow/o_dada2_rep_seq_artifact
   out_dada2_table:
     type: File
-    outputSource: qiime2_workflow/o_dada2_table
+    outputSource: qiime2_workflow/o_dada2_table_artifact
   out_dada2_denoising_stats:
     type: File
-    outputSource: qiime2_workflow/o_dada2_denoising_stats
+    outputSource: qiime2_workflow/o_dada2_denoising_stats_artifact
   out_metadata_stats_visualization:
     type: File
     outputSource: qiime2_workflow/o_metadata_stats_visualization 
   out_feature-table-summarize:
     type: File
-    outputSource: qiime2_workflow/o_feature-table-summarize
+    outputSource: qiime2_workflow/o_feature_table_summarize_visualization
   out_feature-table-tabulate-seqs:
     type: File
-    outputSource: qiime2_workflow/o_feature-table-tabulate-seqs
+    outputSource: qiime2_workflow/o_feature_table_tabulate_seqs_visualization
   out_phylogeny_alignment:
     type: File
-    outputSource: qiime2_workflow/o_phylogeny_alignment
+    outputSource: qiime2_workflow/o_phylogeny_alignment_artifact
   out_phylogeny_masked_alignment:
     type: File
-    outputSource: qiime2_workflow/o_phylogeny_masked_alignment
+    outputSource: qiime2_workflow/o_phylogeny_masked_alignment_artifact
   out_phylogeny_tree:
     type: File
-    outputSource: qiime2_workflow/o_phylogeny_tree
+    outputSource: qiime2_workflow/o_phylogeny_unrooted_tree_artifact
   out_phylogeny_rooted_tree:
     type: File
-    outputSource: qiime2_workflow/o_phylogeny_rooted_tree
+    outputSource: qiime2_workflow/o_phylogeny_rooted_tree_artifact
   out_diversity_metrics_dir:
     type: Directory
     outputSource: qiime2_workflow/o_diversity_metrics_dir
   out_alpha_rarefaction:
     type: File
-    outputSource: qiime2_workflow/o_alpha_rarefaction
+    outputSource: qiime2_workflow/o_alpha_rarefaction_visualization
   out_classifier_sklearn:
     type: File
-    outputSource: qiime2_workflow/o_classifier_sklearn
+    outputSource: qiime2_workflow/o_classifier_sklearn_artifact
   out_classifier_sklearn_visualization:
     type: File
     outputSource: qiime2_workflow/o_classifier_sklearn_visualization
@@ -187,9 +187,9 @@ steps:
       classifier: classifier
       diversity_sampling_depth: diversity_sampling_depth
       rarefaction_max_depth: rarefaction_max_depth
-    out: [o_artifact_tools_import, o_demux, o_demux_details, o_demux_summarize,
-          o_dada2_rep_seq, o_dada2_table, o_dada2_denoising_stats, o_metadata_stats_visualization,
-          o_feature-table-summarize, o_feature-table-tabulate-seqs, o_phylogeny_alignment,
-          o_phylogeny_masked_alignment, o_phylogeny_tree, o_phylogeny_rooted_tree, o_diversity_metrics_dir,
-          o_alpha_rarefaction, o_classifier_sklearn, o_classifier_sklearn_visualization, o_taxa_barplot_visualization,
+    out: [o_artifact_tools_import, o_demux_artifact, o_demux_details_artifact, o_demux_summarize_artifact,
+          o_dada2_rep_seq_artifact, o_dada2_table_artifact, o_dada2_denoising_stats_artifact, o_metadata_stats_visualization,
+          o_feature_table_summarize_visualization, o_feature_table_tabulate_seqs_visualization, o_phylogeny_alignment_artifact,
+          o_phylogeny_masked_alignment_artifact, o_phylogeny_unrooted_tree_artifact, o_phylogeny_rooted_tree_artifact, o_diversity_metrics_dir,
+          o_alpha_rarefaction_visualization, o_classifier_sklearn_artifact, o_classifier_sklearn_visualization, o_taxa_barplot_visualization,
           o_feature_table_filter_samples_artifact, o_composition_table_visualization]

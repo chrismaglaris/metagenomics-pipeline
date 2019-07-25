@@ -31,13 +31,13 @@ inputs:
   dada2_trunc_len:
     type: int
     default: 120
-  dada2_rep_seq:
+  dada2_rep_seq_artifact:
     type: string
     default: rep-seqs-dada2.qza
-  dada2_table:
+  dada2_table_artifact:
     type: string
     default: table-dada2.qza
-  dada2_stats:
+  dada2_stats_artifact:
     type: string
     default: stats-dada2.qza
   metadata_stats_visualization:
@@ -46,19 +46,19 @@ inputs:
   feature_table_summarize_visualization:
     type: string
     default: table.qzv
-  feature_table_tabulate_seqs:
+  feature_table_tabulate_seqs_visualization:
     type: string
     default: rep-seqs.qzv
-  phylogeny_alignment:
+  phylogeny_alignment_artifact:
     type: string
     default: aligned-rep-seqs.qza
-  phylogeny_masked_alignment:
+  phylogeny_masked_alignment_artifact:
     type: string
     default: masked-aligned-rep-seqs.qza
-  phylogeny_tree:
+  phylogeny_tree_artifact:
     type: string
     default: unrooted-tree.qza
-  phylogeny_rooted_tree:
+  phylogeny_rooted_tree_artifact:
     type: string
     default: rooted-tree.qza
   diversity_sampling_depth:
@@ -73,7 +73,7 @@ inputs:
   rarefaction_visualization:
     type: string
     default: alpha-rarefaction.qzv
-  classifier_sklearn:
+  classifier_sklearn_artifact:
     type: string
     default: taxonomy.qza
   classifier_sklearn_visualization:
@@ -113,57 +113,57 @@ outputs:
   o_artifact_tools_import:
     type: File
     outputSource: qiime-tools-import/artifact_tools_import
-  o_demux:
+  o_demux_artifact:
     type: File
     outputSource: qiime-demux-emp-paired/demux
-  o_demux_details:
+  o_demux_details_artifact:
     type: File
     outputSource: qiime-demux-emp-paired/demux_details
-  o_demux_summarize:
+  o_demux_summarize_artifact:
     type: File
     outputSource: qiime-demux-summarize/demux_visualization
-  o_dada2_rep_seq:
+  o_dada2_rep_seq_artifact:
     type: File
     outputSource: qiime-dada2-denoise-single/rep_seq
-  o_dada2_table:
+  o_dada2_table_artifact:
     type: File
     outputSource: qiime-dada2-denoise-single/table
-  o_dada2_denoising_stats:
+  o_dada2_denoising_stats_artifact:
     type: File
     outputSource: qiime-dada2-denoise-single/denoising_stats
   o_metadata_stats_visualization:
     type: File
     outputSource: qiime-metadata-tabulate/stats_visualization 
-  o_feature-table-summarize:
+  o_feature_table_summarize_visualization:
     type: File
     outputSource: qiime-feature-table-summarize/table_visualization
-  o_feature-table-tabulate-seqs:
+  o_feature_table_tabulate_seqs_visualization:
     type: File
     outputSource: qiime-feature-table-tabulate-seqs/rep_seqs_visualization
-  o_phylogeny_alignment:
+  o_phylogeny_alignment_artifact:
     type: File
-    outputSource: qiime-align-to-tree-mafft-fasttree/alignment
-  o_phylogeny_masked_alignment:
+    outputSource: qiime-phylogeny-align-to-tree-mafft-fasttree/alignment
+  o_phylogeny_masked_alignment_artifact:
     type: File
-    outputSource: qiime-align-to-tree-mafft-fasttree/masked_alignment
-  o_phylogeny_tree:
+    outputSource: qiime-phylogeny-align-to-tree-mafft-fasttree/masked_alignment
+  o_phylogeny_unrooted_tree_artifact:
     type: File
-    outputSource: qiime-align-to-tree-mafft-fasttree/tree
-  o_phylogeny_rooted_tree:
+    outputSource: qiime-phylogeny-align-to-tree-mafft-fasttree/tree
+  o_phylogeny_rooted_tree_artifact:
     type: File
-    outputSource: qiime-align-to-tree-mafft-fasttree/rooted_tree
+    outputSource: qiime-phylogeny-align-to-tree-mafft-fasttree/rooted_tree
   o_diversity_metrics_dir:
     type: Directory
     outputSource: qiime-diversity-core-metrics-phylogenetic/phylogenetic_metrics_dir
-  o_alpha_rarefaction:
+  o_alpha_rarefaction_visualization:
     type: File
     outputSource: qiime-diversity-alpha-rarefaction/demux_visualization
-  o_classifier_sklearn:
+  o_classifier_sklearn_artifact:
     type: File
-    outputSource: qiime-feature-classifier-sklearn/classification
+    outputSource: qiime-feature-classifier-classify-sklearn/classification
   o_classifier_sklearn_visualization:
     type: File
-    outputSource: classifier-sklearn-visualization/stats_visualization
+    outputSource: qiime-classifier-sklearn-visualization/stats_visualization
   o_taxa_barplot_visualization:
     type: File
     outputSource: qiime-taxa-barplot/visualization
@@ -210,9 +210,9 @@ steps:
       input_demux: qiime-demux-emp-paired/demux
       trim_left: dada2_trim_left
       trunc_len: dada2_trunc_len
-      output_rep_seq: dada2_rep_seq
-      output_table: dada2_table
-      output_denoising_stats: dada2_stats
+      output_rep_seq: dada2_rep_seq_artifact
+      output_table: dada2_table_artifact
+      output_denoising_stats: dada2_stats_artifact
     out: [rep_seq, table, denoising_stats]
   qiime-metadata-tabulate:
     run: ../wrappers/metadata-tabulate.cwl
@@ -231,21 +231,21 @@ steps:
     run: ../wrappers/tabulate-seqs.cwl
     in: 
       input_rep_seqs: qiime-dada2-denoise-single/rep_seq
-      output_rep_seqs_visualization: feature_table_tabulate_seqs
+      output_rep_seqs_visualization: feature_table_tabulate_seqs_visualization
     out: [rep_seqs_visualization]
-  qiime-align-to-tree-mafft-fasttree:
+  qiime-phylogeny-align-to-tree-mafft-fasttree:
     run: ../wrappers/align-to-tree-mafft-fasttree.cwl
     in:
       input_rep_seqs: qiime-dada2-denoise-single/rep_seq
-      output_alignment: phylogeny_alignment
-      output_masked_alignment: phylogeny_masked_alignment
-      output_tree: phylogeny_tree
-      output_rooted_tree: phylogeny_rooted_tree
+      output_alignment: phylogeny_alignment_artifact
+      output_masked_alignment: phylogeny_masked_alignment_artifact
+      output_tree: phylogeny_tree_artifact
+      output_rooted_tree: phylogeny_rooted_tree_artifact
     out: [alignment, masked_alignment, tree, rooted_tree]
   qiime-diversity-core-metrics-phylogenetic:
     run: ../wrappers/core-metrics-phylogenetic.cwl
     in:
-      input_rooted_tree: qiime-align-to-tree-mafft-fasttree/rooted_tree
+      input_rooted_tree: qiime-phylogeny-align-to-tree-mafft-fasttree/rooted_tree
       input_table: qiime-dada2-denoise-single/table
       input_sampling_depth: diversity_sampling_depth
       input_metadata: metadata_file
@@ -255,29 +255,29 @@ steps:
     run: ../wrappers/alpha-rarefaction.cwl
     in:
       input_table: qiime-dada2-denoise-single/table
-      input_phylogeny: qiime-align-to-tree-mafft-fasttree/rooted_tree
+      input_phylogeny: qiime-phylogeny-align-to-tree-mafft-fasttree/rooted_tree
       input_max_depth: rarefaction_max_depth
       input_metadata: metadata_file
       output_visualization: rarefaction_visualization
     out: [demux_visualization]
-  qiime-feature-classifier-sklearn:
+  qiime-feature-classifier-classify-sklearn:
     run: ../wrappers/classify-sklearn.cwl
     in:
       input_classifier: classifier
       input_reads: qiime-dada2-denoise-single/rep_seq
-      output_classification: classifier_sklearn
+      output_classification: classifier_sklearn_artifact
     out: [classification]
-  classifier-sklearn-visualization:
+  qiime-classifier-sklearn-visualization:
     run: ../wrappers/metadata-tabulate.cwl
     in:
-      input_stats_file: qiime-feature-classifier-sklearn/classification
+      input_stats_file: qiime-feature-classifier-classify-sklearn/classification
       output_stats_visualization: classifier_sklearn_visualization
     out: [stats_visualization]
   qiime-taxa-barplot:
     run: ../wrappers/taxa-barplot.cwl
     in: 
       input_table: qiime-dada2-denoise-single/table
-      input_taxonomy: qiime-feature-classifier-sklearn/classification
+      input_taxonomy: qiime-feature-classifier-classify-sklearn/classification
       input_metadata: metadata_file
       output_visualization: taxa_barplot_visualization
     out: [visualization]
