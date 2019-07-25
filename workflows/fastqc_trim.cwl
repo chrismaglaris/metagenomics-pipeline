@@ -1,52 +1,53 @@
 #!/usr/bin/env cwl-runner
-
 cwlVersion: v1.0
 class: Workflow
 inputs:
-  files:
+  raw_files:
     type:
       type: array
       items: File
-  barcodes:
+  barcodes_file:
     type: File
   FqcTr_dir_name:
     type: string
     default: fastqc_trim_workflow
-  qiim2_input_dir_name:
+  qiime2_input_dir_name:
     type: string
     default: emp-paired-seq
 outputs: 
-  output_Fqc_Tr:
+  fastqc_trim_workflow_dir:
     type: Directory
-    outputSource: create_fqc_tr_dir/output_dir
-  output_GZ_files:
+    outputSource: create_workflows_directories/workflow_dir
+  qiime2_workflow_input_dir:
     type: Directory
-    outputSource: create_fqc_tr_dir/output_dir2
+    outputSource: create_workflows_directories/qiime2_workflow_dir
 steps:
-  fastqc1:
+  fastqc_pre:
     run: ../wrappers/fastqc.cwl
     in:
-      files: files
+      files: raw_files
     out: [fastqc_html_output, fastqc_zip_output]
   trim_galore:
     run: ../wrappers/trim.cwl
     in:
-      files: files
+      files: raw_files
     out: [outputGZ, outputTXT]
-  fastqc2:
+  fastqc_post:
     run: ../wrappers/fastqc.cwl
     in:
       files: trim_galore/outputGZ
     out: [fastqc_html_output, fastqc_zip_output]
-  create_fqc_tr_dir:
+  create_workflows_directories:
     run: ../wrappers/move-to-dir.cwl
     in:
-      rawFiles: files
+      rawFiles: raw_files
       filesGZ: trim_galore/outputGZ
       filesTXT: trim_galore/outputTXT
-      filesHTML_pre: fastqc1/fastqc_html_output
-      filesZIP_pre: fastqc1/fastqc_zip_output
-      filesHTML_post: fastqc2/fastqc_html_output
-      filesZIP_post: fastqc2/fastqc_zip_output
-      barcodes: barcodes
-    out: [output_dir, output_dir2]
+      filesHTML_pre: fastqc_pre/fastqc_html_output
+      filesZIP_pre: fastqc_pre/fastqc_zip_output
+      filesHTML_post: fastqc_post/fastqc_html_output
+      filesZIP_post: fastqc_post/fastqc_zip_output
+      barcodes: barcodes_file
+      dir_basename: FqcTr_dir_name
+      qiime2_input_dir: qiime2_input_dir_name
+    out: [workflow_dir, qiime2_workflow_dir]

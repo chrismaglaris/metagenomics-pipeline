@@ -1,5 +1,4 @@
 #!/usr/bin/env cwl-runner
-
 cwlVersion: v1.0
 class: ExpressionTool
 requirements:
@@ -50,30 +49,27 @@ inputs:
     default: emp-paired-seq
 expression: |
   ${
-
     var obj = {
-      "output_dir": {
+      "workflow_dir": {
         "class": "Directory",
         "basename": inputs.dir_basename,
         "listing": inputs.filesTXT.concat(inputs.filesGZ, inputs.filesHTML_pre, inputs.filesZIP_pre, inputs.filesHTML_post, inputs.filesZIP_post)
       }
     };
-
     inputs.rawFiles[0].basename = "forward.fastq.gz";
     inputs.rawFiles[1].basename = "reverse.fastq.gz";
     inputs.rawFiles.push(inputs.barcodes);
 
-    var output_dir2 = {
+    var qiime2_workflow_dir = {
         "class": "Directory",
         "basename": inputs.qiime2_input_dir,
         "listing": inputs.rawFiles
       };
-
     return { 
-      "output_dir": obj,
-      "output_dir2": output_dir2
+      "workflow_dir": obj,
+      "qiime2_workflow_dir": qiime2_workflow_dir
     };
   }
 outputs:
-  output_dir: Directory
-  output_dir2: Directory
+  workflow_dir: Directory
+  qiime2_workflow_dir: Directory
