@@ -25,12 +25,18 @@ inputs:
   demux_visualization:
     type: string
     default: demux.qzv
-  dada2_trim_left:
+  dada2_trim_left_f:
     type: int
     default: 0
-  dada2_trunc_len:
+  dada2_trunc_len_f:
     type: int
     default: 120
+  # dada2_trim_left_r:
+  #   type: int
+  #   default: 0
+  # dada2_trunc_len_r:
+  #   type: int
+  #   default: 120
   dada2_rep_seq:
     type: string
     default: rep-seqs-dada2.qza
@@ -199,17 +205,24 @@ steps:
       input_data: qiime-demux-emp-paired/demux
       output_visualization: demux_visualization
     out: [demux_visualization]
-  # qiime-vsearch-join-pairs:
-  #   run: ../wrappers/vsearch-join-pairs.cwl
+  # qiime-dada2-denoise-paired:
+  #   run: ../wrappers/dada2-denoise-paired.cwl
   #   in: 
-  #     input_data: qiime-demux-emp-paired/demux
-  #   out: [joined-sequences]
+  #     input_demux: qiime-demux-emp-paired/demux
+  #     trim_left_f: dada2_trim_left_f
+  #     trunc_len_f: dada2_trunc_len_f
+  #     trim_left_r: dada2_trim_left_r
+  #     trunc_len_r: dada2_trunc_len_r
+  #     output_rep_seq: dada2_rep_seq
+  #     output_table: dada2_table
+  #     output_denoising_stats: dada2_stats
+  #   out: [rep_seq, table, denoising_stats]
   qiime-dada2-denoise-single:
     run: ../wrappers/dada2-denoise-single.cwl
     in: 
       input_demux: qiime-demux-emp-paired/demux
-      trim_left: dada2_trim_left
-      trunc_len: dada2_trunc_len
+      trim_left: dada2_trim_left_f
+      trunc_len: dada2_trunc_len_f
       output_rep_seq: dada2_rep_seq
       output_table: dada2_table
       output_denoising_stats: dada2_stats
@@ -295,6 +308,11 @@ steps:
       input_table: qiime-feature-table-filter-samples/filtered_table
       output_composition_table: composition_add_pseudocount_artifact
     out: [composition_table]
+  # qiime-vsearch-join-pairs:
+  #   run: ../wrappers/vsearch-join-pairs.cwl
+  #   in: 
+  #     input_data: qiime-demux-emp-paired/demux
+  #   out: [joined-sequences]
   # qiime-composition-ancom:
   #   run: ../wrappers/composition-ancom.cwl
   #   in:
@@ -303,8 +321,6 @@ steps:
   #     input_metadata_column: composition_ancom
   #     output_visualization: composition_ancom_visualization
   #   out: [visualization]
-
-
   # search-for-file-faith:
   #   run: ../wrappers/search-in-dir.cwl
   #   in: 
