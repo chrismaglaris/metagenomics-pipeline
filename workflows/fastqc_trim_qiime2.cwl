@@ -103,10 +103,10 @@ inputs:
 outputs: 
   Fqc_Tr_dir:
     type: Directory
-    outputSource: fastqc_trim_galore/output_Fqc_Tr
+    outputSource: fastqc_trim_galore/fastqc_trim_workflow_dir
   GZ_files_dir:
     type: Directory
-    outputSource: fastqc_trim_galore/output_GZ_files
+    outputSource: fastqc_trim_galore/qiime2_workflow_input_dir
   out_artifact_tools_import:
     type: File
     outputSource: qiime2_workflow/o_artifact_tools_import
@@ -181,7 +181,7 @@ steps:
   qiime2_workflow:
     run: ../workflows/qiime2_workflow.cwl
     in:
-      fastq_dir: fastqc_trim_galore/output_GZ_files
+      fastq_dir: fastqc_trim_galore/qiime2_workflow_input_dir
       barcodes: barcodes
       metadata_file: metadata
       classifier: classifier
