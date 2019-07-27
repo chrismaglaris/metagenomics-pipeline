@@ -7,8 +7,6 @@ requirements:
 inputs:
   fastq_dir:
     type: Directory
-  barcodes:
-    type: File
   metadata_file:
     type: File
   classifier:
@@ -194,7 +192,7 @@ steps:
     run: ../wrappers/demux-emp-paired.cwl
     in:
       input_seq: qiime-tools-import/artifact_tools_import
-      barcodes_file: metadata_file
+      metadata_file: metadata_file
       barcode_column: demux_barcode_column
       output_demux: demux_artifact
       output_demux_details: demux_details_artifact

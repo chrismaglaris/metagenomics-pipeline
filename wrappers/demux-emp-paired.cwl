@@ -8,7 +8,7 @@ inputs:
     type: File
     inputBinding:
       prefix: --i-seqs
-  barcodes_file:
+  metadata_file:
     type: File
     inputBinding:
       prefix: --m-barcodes-file
