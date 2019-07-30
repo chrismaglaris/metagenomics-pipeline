@@ -1,14 +1,16 @@
 files:
   - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R1_001.fastq.gz} 
   - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R2_001.fastq.gz}
-barcodes:
+  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R1_001.fastq.gz}
+  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R2_001.fastq.gz}
+manifest:
   class: File
-  path: ../barcodes/barcodes.fastq.gz
+  path: ../mapping/manifest
 metadata:
   class: File
-  path: ../metadata/metadata.tsv
+  path: ../mapping/manifest
 classifier:
   class: File
   path: ../classifiers/gg-13-8-99-515-806-nb-classifier.qza
-rarefaction_max_depth: 100
+rarefaction_max_depth: 129
 diversity_sampling_depth: 1

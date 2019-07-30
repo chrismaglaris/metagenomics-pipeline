@@ -25,7 +25,7 @@ inputs:
     inputBinding:
       prefix: --o-visualization
 outputs: 
-  demux_visualization:
+  alpha_rarefaction_visualization:
     type: File
     outputBinding:
       glob: $(inputs.output_visualization)

@@ -1,6 +1,5 @@
 raw_files:
   - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R1_001.fastq.gz} 
   - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R2_001.fastq.gz}
-barcodes_file:
-  class: File
-  path: ../barcodes/barcodes.fastq.gz
+  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R1_001.fastq.gz}
+  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R2_001.fastq.gz}

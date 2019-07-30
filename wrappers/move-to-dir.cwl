@@ -4,11 +4,11 @@ class: ExpressionTool
 requirements:
   InlineJavascriptRequirement: {}
 inputs:
-  rawFiles:
-    type: 
-      type: array
-      items: File
-    default: []
+  # rawFiles:
+  #   type: 
+  #     type: array
+  #     items: File
+  #   default: []
   filesGZ:
     type:
       type: array
@@ -39,14 +39,14 @@ inputs:
       type: array
       items: File
     default: []
-  barcodes:
-    type: File
+  # barcodes:
+  #   type: File
   dir_basename:
     type: string
     default: fastqc_trim_workflow
-  qiime2_input_dir:
-    type: string
-    default: emp-paired-seq
+  # qiime2_input_dir:
+  #   type: string
+  #   default: emp-paired-seq
 expression: |
   ${
     var obj = {
@@ -56,20 +56,11 @@ expression: |
         "listing": inputs.filesTXT.concat(inputs.filesGZ, inputs.filesHTML_pre, inputs.filesZIP_pre, inputs.filesHTML_post, inputs.filesZIP_post)
       }
     };
-    inputs.rawFiles[0].basename = "forward.fastq.gz";
-    inputs.rawFiles[1].basename = "reverse.fastq.gz";
-    inputs.rawFiles.push(inputs.barcodes);
 
-    var qiime2_workflow_dir = {
-        "class": "Directory",
-        "basename": inputs.qiime2_input_dir,
-        "listing": inputs.rawFiles
-      };
     return { 
-      "workflow_dir": obj,
-      "qiime2_workflow_dir": qiime2_workflow_dir
+      "workflow_dir": obj
     };
   }
 outputs:
   workflow_dir: Directory
-  qiime2_workflow_dir: Directory
+  # qiime2_workflow_dir: Directory

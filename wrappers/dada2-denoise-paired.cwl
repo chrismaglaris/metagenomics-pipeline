@@ -24,6 +24,10 @@ inputs:
     type: int
     inputBinding:
       prefix: --p-trunc-len-r
+  num_of_threads:
+    type: int
+    inputBinding:
+      prefix: --p-n-threads
   output_rep_seq:
     type: string
     inputBinding:

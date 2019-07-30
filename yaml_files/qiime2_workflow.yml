@@ -1,14 +1,14 @@
-fastq_dir:
-  class: Directory
-  path: ../emp-paired-seq
-barcodes:
+manifest_file:
   class: File
-  path: ../barcodes/barcodes.fastq.gz
+  path: ../mapping/manifest
+# barcodes:
+#   class: File
+#   path: ../barcodes/barcodes.fastq.gz
 metadata_file:
   class: File
-  path: ../metadata/metadata.tsv
+  path: ../mapping/manifest
 classifier:
   class: File
   path: ../classifiers/gg-13-8-99-515-806-nb-classifier.qza
-rarefaction_max_depth: 100
 diversity_sampling_depth: 1
+rarefaction_max_depth: 129
