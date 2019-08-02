@@ -1,6 +1,6 @@
-phyloseq_tree_1 <- function(sample_metadata, table, taxonomy, rooted_tree) { 
+phyloseq_tree = function(sample_metadata, table, taxonomy, rooted_tree) { 
 	
-  .libPaths(c(.libPaths(), "/home/chris/R/x86_64-pc-linux-gnu-library/3.6"))
+  .libPaths(c(.libPaths()))
   library(tidyverse)
   library(qiime2R)
   library(phyloseq)
@@ -19,15 +19,11 @@ phyloseq_tree_1 <- function(sample_metadata, table, taxonomy, rooted_tree) {
                     tax_table(as.data.frame(taxtable) %>% select(-Confidence) %>% column_to_rownames("Feature.ID") %>% as.matrix()), 
                     sample_data(metadata %>% column_to_rownames(colnames(metadata)[1])))
   
-
-  
   ptree = plot_tree(physeq, color = 'Family', shape = 'Sample', size = 'Abundance')
   
   png("treeplot.png", width = 1120, height = 664)
   print(ptree)
   dev.off()
-  
-
 }
 
 args = commandArgs(trailingOnly=TRUE);

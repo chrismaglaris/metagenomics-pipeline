@@ -21,6 +21,3 @@ outputs:
 
 arguments:
   - valueFrom: $(runtime.outdir)
-   
- 
-

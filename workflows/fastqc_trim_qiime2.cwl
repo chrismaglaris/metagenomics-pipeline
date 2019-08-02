@@ -12,8 +12,10 @@ inputs:
       items: File
   # barcodes:
   #   type: File
-  manifest:
-    type: File
+  pre_demux_file:
+    type: File?
+  post_demux_file:
+    type: File?
   metadata:
     type: File
   classifier:
@@ -118,15 +120,12 @@ outputs:
   # GZ_files_dir:
   #   type: Directory
   #   outputSource: fastqc_trim_galore/qiime2_workflow_input_dir
-  out_artifact_tools_import:
-    type: File
-    outputSource: qiime2_workflow/o_artifact_tools_import
-  # out_demux:
-  #   type: File
-  #   outputSource: qiime2_workflow/o_demux_artifact
-  # out_demux_details:
-  #   type: File
-  #   outputSource: qiime2_workflow/o_demux_details_artifact
+  out_demux:
+    type: File?
+    outputSource: qiime2_workflow/o_demux_artifact
+  out_demux_details:
+    type: File?
+    outputSource: qiime2_workflow/o_demux_details_artifact
   # out_demux_summarize:
   #   type: File
   #   outputSource: qiime2_workflow/o_demux_summarize_artifact
@@ -142,12 +141,12 @@ outputs:
   # out_metadata_stats_visualization:
   #   type: File
   #   outputSource: qiime2_workflow/o_metadata_stats_visualization 
-  out_feature-table-summarize:
-    type: File
-    outputSource: qiime2_workflow/o_feature_table_summarize_visualization
-  out_feature-table-tabulate-seqs:
-    type: File
-    outputSource: qiime2_workflow/o_feature_table_tabulate_seqs_visualization
+  # out_feature-table-summarize:
+  #   type: File
+  #   outputSource: qiime2_workflow/o_feature_table_summarize_visualization
+  # out_feature-table-tabulate-seqs:
+  #   type: File
+  #   outputSource: qiime2_workflow/o_feature_table_tabulate_seqs_visualization
   out_phylogeny_alignment:
     type: File
     outputSource: qiime2_workflow/o_phylogeny_alignment_artifact
@@ -163,15 +162,15 @@ outputs:
   out_diversity_metrics_dir:
     type: Directory
     outputSource: qiime2_workflow/o_diversity_metrics_dir
-  out_alpha_rarefaction:
-    type: File
-    outputSource: qiime2_workflow/o_alpha_rarefaction_visualization
+  # out_alpha_rarefaction:
+  #   type: File
+  #   outputSource: qiime2_workflow/o_alpha_rarefaction_visualization
   out_classifier_sklearn:
     type: File
     outputSource: qiime2_workflow/o_classifier_sklearn_artifact
-  out_classifier_sklearn_visualization:
-    type: File
-    outputSource: qiime2_workflow/o_classifier_sklearn_visualization
+  # out_classifier_sklearn_visualization:
+  #   type: File
+  #   outputSource: qiime2_workflow/o_classifier_sklearn_visualization
   # out_taxa_barplot_visualization:
   #   type: File
   #   outputSource: qiime2_workflow/o_taxa_barplot_visualization
@@ -192,14 +191,19 @@ steps:
   qiime2_workflow:
     run: ../workflows/qiime2_workflow.cwl
     in:
-      manifest_file: manifest
-      # barcodes: barcodes
+      post_demux_file: post_demux_file
       metadata_file: metadata
       classifier: classifier
       diversity_sampling_depth: diversity_sampling_depth
       rarefaction_max_depth: rarefaction_max_depth
-    out: [o_artifact_tools_import, 
-          o_dada2_rep_seq_artifact, o_dada2_table_artifact, o_dada2_denoising_stats_artifact,
-          o_feature_table_summarize_visualization, o_feature_table_tabulate_seqs_visualization, o_phylogeny_alignment_artifact,
-          o_phylogeny_masked_alignment_artifact, o_phylogeny_unrooted_tree_artifact, o_phylogeny_rooted_tree_artifact, o_diversity_metrics_dir,
-          o_alpha_rarefaction_visualization, o_classifier_sklearn_artifact, o_classifier_sklearn_visualization]
+    out: [o_demux_artifact, 
+          o_demux_details_artifact,
+          o_dada2_rep_seq_artifact, 
+          o_dada2_table_artifact, 
+          o_dada2_denoising_stats_artifact,
+          o_phylogeny_alignment_artifact,
+          o_phylogeny_masked_alignment_artifact, 
+          o_phylogeny_unrooted_tree_artifact, 
+          o_phylogeny_rooted_tree_artifact, 
+          o_diversity_metrics_dir,
+          o_classifier_sklearn_artifact]

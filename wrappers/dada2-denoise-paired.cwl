@@ -2,10 +2,10 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-baseCommand: ["qiime", "dada2", "denoise-paired"]
+baseCommand: [qiime, dada2, denoise-paired]
 inputs:
   input_demux:
-    type: File
+    type: File?
     inputBinding:
       prefix: --i-demultiplexed-seqs
   trim_left_f:

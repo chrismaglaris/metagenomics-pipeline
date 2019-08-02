@@ -1,14 +1,11 @@
-manifest_file:
-  class: File
-  path: ../mapping/manifest
-# barcodes:
-#   class: File
-#   path: ../barcodes/barcodes.fastq.gz
 metadata_file:
   class: File
-  path: ../mapping/manifest
+  path: ../metadata.tsv
+
+post_demux_file:
+  class: File
+  path: ../demux-nikos.qza
+
 classifier:
   class: File
   path: ../classifiers/gg-13-8-99-515-806-nb-classifier.qza
-diversity_sampling_depth: 1
-rarefaction_max_depth: 129

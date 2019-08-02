@@ -1,5 +1,0 @@
-files:
-  - {class: File, path: manifest} 
-  - {class: File, path: table.qza}
-  - {class: File, path: taxonomy.qza}
-  - {class: File, path: rooted-tree.qza}
