@@ -168,6 +168,9 @@ outputs:
   out_classifier_sklearn:
     type: File
     outputSource: qiime2_workflow/o_classifier_sklearn_artifact
+  out_phylogenetic_tree_image:
+    type: File
+    outputSource: create_im_phylogenetic_tree/output
   # out_classifier_sklearn_visualization:
   #   type: File
   #   outputSource: qiime2_workflow/o_classifier_sklearn_visualization
