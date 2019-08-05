@@ -207,3 +207,11 @@ steps:
           o_phylogeny_rooted_tree_artifact, 
           o_diversity_metrics_dir,
           o_classifier_sklearn_artifact]
+  create_im_phylogenetic_tree:
+    run: ../wrappers/Rscript2.cwl
+    in:
+      manifest_file: metadata
+      table_file: qiime2_workflow/o_dada2_table_artifact
+      taxonomy_file: qiime2_workflow/o_classifier_sklearn_artifact
+      rooted_tree_file: qiime2_workflow/o_phylogeny_rooted_tree_artifact
+    out: [output]
