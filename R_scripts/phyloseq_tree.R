@@ -1,15 +1,7 @@
-phyloseq_tree = function(sample_metadata, table, taxonomy, rooted_tree, libraries) { 
-	
-  .libPaths(c(.libPaths(), libraries))
+phyloseq_tree = function(sample_metadata, table, taxonomy, rooted_tree, libraries = "") { 
+  .libPaths(c(libraries))
 
-  library(dplyr)
-  library(tidyr)
-  library(magrittr)
-  library(readr)
-  library(purrr)
-  library(tibble)
-  library(stringr)
-  library(forcats)
+  library(tidyverse)
   library(qiime2R)
   library(phyloseq)
   library(png)
