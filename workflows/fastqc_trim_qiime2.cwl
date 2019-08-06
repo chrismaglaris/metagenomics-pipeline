@@ -110,6 +110,16 @@ inputs:
   FqcTr_dir_name:
     type: string
     default: fastqc_trim_workflow
+  Rcommand_location:
+    type: string
+    default: /usr/bin/Rscript
+  R_script_to_execute:
+    type: File
+  libraries_needed:
+    type: 
+      type: array
+      items: string
+    default: []
   # qiim2_input_dir_name:
   #   type: string
   #   default: emp-paired-seq
@@ -170,7 +180,7 @@ outputs:
     outputSource: qiime2_workflow/o_classifier_sklearn_artifact
   out_phylogenetic_tree_image:
     type: File
-    outputSource: create_im_phylogenetic_tree/output
+    outputSource: create_image_phylogenetic_tree/phylogenetic_image
   # out_classifier_sklearn_visualization:
   #   type: File
   #   outputSource: qiime2_workflow/o_classifier_sklearn_visualization
@@ -210,11 +220,14 @@ steps:
           o_phylogeny_rooted_tree_artifact, 
           o_diversity_metrics_dir,
           o_classifier_sklearn_artifact]
-  create_im_phylogenetic_tree:
-    run: ../wrappers/Rscript2.cwl
+  create_image_phylogenetic_tree:
+    run: ../wrappers/Rscript.cwl
     in:
-      manifest_file: metadata
+      R_command_to_execute: Rcommand_location
+      script_to_execute: R_script_to_execute
+      metadata_file: metadata
       table_file: qiime2_workflow/o_dada2_table_artifact
       taxonomy_file: qiime2_workflow/o_classifier_sklearn_artifact
       rooted_tree_file: qiime2_workflow/o_phylogeny_rooted_tree_artifact
-    out: [output]
+      libraries_for_R_script: libraries_needed
+    out: [phylogenetic_image]

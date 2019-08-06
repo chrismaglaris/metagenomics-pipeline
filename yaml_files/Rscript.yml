@@ -1,0 +1,21 @@
+script_to_execute:
+  class: File
+  path: ../R_scripts/phyloseq_tree.R
+
+metadata_file:
+  class: File
+  path: ../mapping/manifest
+
+table_file:
+  class: File
+  path: ../table.qza
+
+taxonomy_file:
+  class: File
+  path: ../taxonomy.qza
+
+rooted_tree_file:
+  class: File
+  path: ../rooted-tree.qza
+
+libraries_for_R_script: [/usr/lib/R/lib]

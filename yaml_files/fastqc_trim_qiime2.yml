@@ -18,3 +18,9 @@ classifier:
 
 rarefaction_max_depth: 129
 diversity_sampling_depth: 1
+
+R_script_to_execute:
+  class: File
+  path: ../R_scripts/phyloseq_tree.R
+
+libraries_needed: [/usr/lib/R/lib]
