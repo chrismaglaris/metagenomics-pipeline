@@ -82,10 +82,10 @@ A test example:
 
 ```
 source acrivate qiime2-2019.4
-cwl-runner fastqc_trim_qiime2.cwl fastqc_trim_qiime2.yml
+cwl-runner workflows/fastqc_trim_qiime2.cwl yaml_files/fastqc_trim_qiime2.yml
 ```
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details
 
