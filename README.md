@@ -1,4 +1,4 @@
-# Project Title
+# Metagenomics - Pipeline
 
 In this project we built a metagenomics-pipeline.
 
