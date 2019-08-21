@@ -16,7 +16,7 @@ outputs:
       type: array
       items: File
     outputBinding:
-      glob: "*.gz"
+      glob: "*.fq"
   outputTXT:
     type:
       type: array
