@@ -1,12 +1,34 @@
 files:
-  - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R1_001.fastq.gz} 
-  - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R2_001.fastq.gz}
-  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R1_001.fastq.gz}
-  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R2_001.fastq.gz}
+  - {class: File, path: ../inputs/16S-7-Kalathaki_S1_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-7-Kalathaki_S1_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-8-Kopanisti_S2_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-8-Kopanisti_S2_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-9-Galotiri_S3_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-9-Galotiri_S3_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R1_001.fastq} 
+  - {class: File, path: ../inputs/16S-10-Feta-Dodoni_S4_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-11-Feta-Helmos_S5_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-12-Batzos-Vermiou_S6_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-12-Batzos-Vermiou_S6_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-13-Batzos-Grev_S7_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-13-Batzos-Grev_S7_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-14-Anevato-Grev_S8_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-14-Anevato-Grev_S8_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-15-Anevato-Tir_S9_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-15-Anevato-Tir_S9_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-16-Kalathaki-Limnou_S10_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-16-Kalathaki-Limnou_S10_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-17-Galotiri-Metsovitiko_S11_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-17-Galotiri-Metsovitiko_S11_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-18-Galotiri_S12_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-18-Galotiri_S12_L001_R2_001.fastq}
+  - {class: File, path: ../inputs/16S-19-Kopanisti-Sirou_S13_L001_R1_001.fastq}
+  - {class: File, path: ../inputs/16S-19-Kopanisti-Sirou_S13_L001_R2_001.fastq}
 
 post_demux_file:
   class: File
-  path: ../demux.qza
+  path: ../feta-paired-end-demux.qza
   
 metadata:
   class: File

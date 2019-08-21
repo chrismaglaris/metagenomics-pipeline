@@ -1,0 +1,14 @@
+sample-id	forward-absolute-filepath	reverse-absolute-filepath
+Kalathaki_S1	$PWD/inputs/16S-7-Kalathaki_S1_L001_R1_001.fastq	$PWD/inputs/16S-7-Kalathaki_S1_L001_R2_001.fastq
+Kopanisti_S2	$PWD/inputs/16S-8-Kopanisti_S2_L001_R1_001.fastq	$PWD/inputs/16S-8-Kopanisti_S2_L001_R2_001.fastq
+Galotiri_S3	$PWD/inputs/16S-9-Galotiri_S3_L001_R1_001.fastq	$PWD/inputs/16S-9-Galotiri_S3_L001_R2_001.fastq
+Feta-Dodoni_S4	$PWD/inputs/16S-10-Feta-Dodoni_S4_L001_R1_001.fastq	$PWD/inputs/16S-10-Feta-Dodoni_S4_L001_R2_001.fastq
+Feta-Helmos_S5	$PWD/inputs/16S-11-Feta-Helmos_S5_L001_R1_001.fastq	$PWD/inputs/16S-11-Feta-Helmos_S5_L001_R2_001.fastq
+Batzos-Vermiou_S6	$PWD/inputs/16S-12-Batzos-Vermiou_S6_L001_R1_001.fastq	$PWD/inputs/16S-12-Batzos-Vermiou_S6_L001_R2_001.fastq
+Batzos-Grev_S7	$PWD/inputs/16S-13-Batzos-Grev_S7_L001_R1_001.fastq	$PWD/inputs/16S-13-Batzos-Grev_S7_L001_R2_001.fastq
+Anevato-Grev_S8	$PWD/inputs/16S-14-Anevato-Grev_S8_L001_R1_001.fastq	$PWD/inputs/16S-14-Anevato-Grev_S8_L001_R2_001.fastq
+Anevato-Tir_S9	$PWD/inputs/16S-15-Anevato-Tir_S9_L001_R1_001.fastq	$PWD/inputs/16S-15-Anevato-Tir_S9_L001_R2_001.fastq
+Kalathaki-Limnou_S10	$PWD/inputs/16S-16-Kalathaki-Limnou_S10_L001_R1_001.fastq	$PWD/inputs/16S-16-Kalathaki-Limnou_S10_L001_R2_001.fastq
+Galotiri-Metsovitiko_S11	$PWD/inputs/16S-17-Galotiri-Metsovitiko_S11_L001_R1_001.fastq	$PWD/inputs/16S-17-Galotiri-Metsovitiko_S11_L001_R2_001.fastq
+Galotiri_S12	$PWD/inputs/16S-18-Galotiri_S12_L001_R1_001.fastq	$PWD/inputs/16S-18-Galotiri_S12_L001_R2_001.fastq
+Kopanisti-Sirou_S13	$PWD/inputs/16S-19-Kopanisti-Sirou_S13_L001_R1_001.fastq	$PWD/inputs/16S-19-Kopanisti-Sirou_S13_L001_R2_001.fastq

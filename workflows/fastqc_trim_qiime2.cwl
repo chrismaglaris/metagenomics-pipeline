@@ -55,7 +55,7 @@ inputs:
     default: stats-dada2.qza
   dada2_num_of_threads:
     type: int
-    default: 24
+    default: 0
   metadata_stats_visualization:
     type: string
     default: stats-dada2.qzv
@@ -209,6 +209,7 @@ steps:
       classifier: classifier
       diversity_sampling_depth: diversity_sampling_depth
       rarefaction_max_depth: rarefaction_max_depth
+      dada2_num_of_threads: dada2_num_of_threads
     out: [o_demux_artifact, 
           o_demux_details_artifact,
           o_dada2_rep_seq_artifact, 
