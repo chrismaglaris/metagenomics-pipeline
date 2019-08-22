@@ -105,20 +105,45 @@ phyloseq_tree_1 <- function(sample_metadata, table, taxonomy, rooted_tree) {
                                         cols = metadata$`sample-id`,  # What columns of sample data to use
                                         groups = metadata$clusters)   # What category each sample is assigned to
   
-  significanceTree = heat_tree(obj, 
-                                node_label = taxon_names,
-                                node_size = n_obs,                           # n_obs is a function that calculates, in this case, the number of OTUs per taxon
-                                node_color = mean_diff,                      # A column from `obj$data$diff_table`
-                                node_color_interval = c(-0.2, 0.2),          # The range of `log2_median_ratio` to display
-                                node_color_range = c("cyan", "gray", "tan"), # The color palette used
-                                node_size_axis_label = "OTU count",
-                                node_color_axis_label = "mean_diff",
-                                layout = "davidson-harel",                   # The primary layout algorithm
-                                initial_layout = "reingold-tilford")         # The layout algorithm that initializes node locations
+  obj$data$diff_table$wilcox_p_value = p.adjust(obj$data$diff_table$wilcox_p_value, method = "fdr")
+  # obj$data$diff_table$log2_median_ratio[obj$data$diff_table$wilcox_p_value > 0.05] = 0
   
-  png("significanceTree.png", width = 2452, height = 1480)
+  # significanceTree = heat_tree(obj, 
+  #                              node_label = taxon_names,
+  #                              node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+  #                              node_color = log2_median_ratio, # A column from `obj$data$diff_table`
+  #                              node_color_interval = c(-2, 2), # The range of `log2_median_ratio` to display
+  #                              node_color_range = c("cyan", "gray", "tan"), # The color palette used
+  #                              node_size_axis_label = "OTU count",
+  #                              node_color_axis_label = "Log 2 ratio of median proportions",
+  #                              layout = "davidson-harel", # The primary layout algorithm
+  #                              initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+  
+  significanceTree = heat_tree(obj, 
+                            node_label = taxon_names,
+                            node_size = n_obs,
+                            node_color = Group_1, 
+                            node_size_axis_label = "OTU count",
+                            node_color_axis_label = "Group_1 samples with reads",
+                            layout = "davidson-harel", # The primary layout algorithm
+                            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+  
+  png("significanceTree_Group_1.png", width = 2452, height = 1480)
   print(significanceTree)
   dev.off()
   
-  return(physeq)
+  significanceTree = heat_tree(obj, 
+                            node_label = taxon_names,
+                            node_size = n_obs,
+                            node_color = Group_2, 
+                            node_size_axis_label = "OTU count",
+                            node_color_axis_label = "Group_2 samples with reads",
+                            layout = "davidson-harel", # The primary layout algorithm
+                            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+  
+  png("significanceTree_Group_2.png", width = 2452, height = 1480)
+  print(significanceTree)
+  dev.off()
+  
+  return(obj)
 }
