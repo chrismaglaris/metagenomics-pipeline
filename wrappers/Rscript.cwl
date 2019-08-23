@@ -39,6 +39,8 @@ inputs:
     default: []
 outputs:
   phylogenetic_image:
-    type: File
+    type: 
+      type: array
+      items: File
     outputBinding:
       glob: "*.png"
