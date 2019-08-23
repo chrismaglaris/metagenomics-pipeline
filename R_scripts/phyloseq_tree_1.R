@@ -1,6 +1,9 @@
 phyloseq_tree_1 <- function(sample_metadata, table, taxonomy, rooted_tree) {
-
+  
   library(readr)
+  library(tidyr)
+  library(dplyr)
+  library(tibble)
   library(stringr)
   library(qiime2R)
   library(phyloseq)
