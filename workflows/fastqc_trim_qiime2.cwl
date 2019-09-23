@@ -34,16 +34,16 @@ inputs:
     default: demux.qzv
   dada2_trim_left_f:
     type: int
-    default: 0
+    default: 13
   dada2_trunc_len_f:
     type: int
-    default: 220
+    default: 150
   dada2_trim_left_r:
     type: int
-    default: 0
+    default: 13
   dada2_trunc_len_r:
     type: int
-    default: 200
+    default: 150
   dada2_rep_seq_artifact:
     type: string
     default: rep-seqs.qza
@@ -201,17 +201,44 @@ steps:
     run: ../workflows/fastqc_trim.cwl
     in:
       raw_files: files
+      FqcTr_dir_name: FqcTr_dir_name
       # barcodes_file: barcodes
     out: [fastqc_trim_workflow_dir]
   qiime2_workflow:
     run: ../workflows/qiime2_workflow.cwl
     in:
+      pre_demux_file: pre_demux_file
       post_demux_file: post_demux_file
       metadata_file: metadata
       classifier: classifier
-      diversity_sampling_depth: diversity_sampling_depth
-      rarefaction_max_depth: rarefaction_max_depth
+      demux_barcode_column: demux_barcode_column
+      demux_artifact: demux_artifact
+      demux_details_artifact: demux_details_artifact
+      demux_visualization: demux_visualization
+      dada2_trim_left_f: dada2_trim_left_f
+      dada2_trim_left_r: dada2_trim_left_r
+      dada2_trunc_len_f: dada2_trunc_len_f
+      dada2_trunc_len_r: dada2_trunc_len_r
+      dada2_rep_seq_artifact: dada2_rep_seq_artifact
+      dada2_stats_artifact: dada2_stats_artifact
+      dada2_table_artifact: dada2_table_artifact
       dada2_num_of_threads: dada2_num_of_threads
+      metadata_stats_visualization: metadata_stats_visualization
+      feature_table_summarize_visualization: feature_table_summarize_visualization
+      feature_table_tabulate_seqs_visualization: feature_table_tabulate_seqs_visualization
+      phylogeny_alignment_artifact: phylogeny_alignment_artifact
+      phylogeny_masked_alignment_artifact: phylogeny_masked_alignment_artifact
+      phylogeny_tree_artifact: phylogeny_tree_artifact
+      phylogeny_rooted_tree_artifact: phylogeny_rooted_tree_artifact
+      diversity_sampling_depth: diversity_sampling_depth
+      diversity_metrics_dir: diversity_metrics_dir
+      rarefaction_max_depth: rarefaction_max_depth
+      classifier_sklearn_artifact: classifier_sklearn_artifact
+      classifier_sklearn_visualization: classifier_sklearn_visualization
+      taxa_barplot_visualization: taxa_barplot_visualization
+      feature_table_filter_samples: feature_table_filter_samples
+      feature_table_filter_samples_artifact: feature_table_filter_samples_artifact
+      composition_add_pseudocount_artifact: composition_add_pseudocount_artifact
     out: [o_demux_artifact, 
           o_demux_details_artifact,
           o_dada2_rep_seq_artifact, 
